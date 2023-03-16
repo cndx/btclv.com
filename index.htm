@@ -1,1 +1,119 @@
-btclv.com
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>比特闪微付 BtcLv.com 比特绿</title><meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<script src="https://lib.sinaapp.com/js/jquery/2.2.4/jquery-2.2.4.min.js"></script>
+<style>
+body{
+margin:auto;
+width:93%;
+max-width:960px;
+min-width:543px;
+padding:10px;
+}
+.v1{
+display:inline-block;
+width:8%;
+}
+.v2{
+display:inline-block;
+width:20%;
+}
+.v3{
+display:inline-block;
+width:8%;
+min-width:90px;
+text-align:right;
+padding-right:10px;
+}
+.v4{
+display:inline-block;
+width:20%;
+}
+.v5{
+display:inline-block;
+}
+</style>
+<base target="_blank" />
+</head>
+<body>
+<h1><img src="favicon.png" width="40" style="width:40px;" />比特闪微付服务 BtcLv.com<span style="float:right;font-size:23px">🇨🇳</span></h1>
+<div>
+<h3>说明：定时延期闪电网络付，在时间过了最迟日期或者提前提交正确放行密令下向LN地址打赏。</h3>
+</div>
+<div>
+<form action="index.htm" target="_blank" method="get">
+接收LN地址：<input type="email" id="eds" name="l" value="" placeholder="cndx@btclv.com">   
+聪量：<input type="number" name="s" value="" placeholder="0" style="width:85px;">SATs   
+最迟日期：<input type="date" id="ed" name="d" value=""> 
+放行密令：<input type="text" id="psd" name="psd" value="" style="width:85px;" placeholder="可空为不放行"> 
+<script>
+var dt=new Date();
+dt=dt.setDate(dt.getDate()+7);
+dt=new Date(dt);
+var m=dt.getMonth()+1;
+if(m<10)m="0"+m;
+var d=dt.getDate();
+if(d<10)d="0"+d;
+document.getElementById("ed").value=dt.getFullYear()+"-"+m+"-"+d;
+</script>
+<input type="submit" value="确定" />
+</form>
+</div>
+
+<h3>列表清单</h3>
+<div id="huilv">
+</div>
+<div id="menus" style="padding-top:30px;">
+<div class="v1">ID</div>
+<div class="v2">接收LN地址</div>
+<div class="v3">聪量SAT</div>
+<div class="v4">最迟日期</div>
+<div class="v5">状态及放行密令</div>
+ </div>
+<div id="lists">
+<div>
+<div class="v1">1</div>
+<div class="v2">cnd@btclv.com</div>
+<div class="v3">8</div>
+<div class="v4">2023-03-23</div>
+<div class="v5">1<input type="text" id="psd" name="psd" value="" style="width:85px;" placeholder=""> <input type="submit" value="放行" /></div></div>
+<div>
+<div class="v1">2</div>
+<div class="v2">cnd@btclv.com</div>
+<div class="v3">188</div>
+<div class="v4">2023-03-23</div>
+<div class="v5">test<input type="text" id="psd" name="psd" value="" style="width:85px;" placeholder=""> <input type="submit" value="放行" /></div></div>
+</div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<hr /> @ BtcLv.com
+<script>
+$.getJSON( "https://btayx.com/txbtc.com/api/?callback=?", function( response ) {
+usdcny=1/response.cny.usd.other.last;
+jgx=response.btc.usd.bitfinex.last*1;
+jg=response.btc.usd.bitstamp.last*1;
+jgk=response.btc.usd.kraken.last*1;
+jg=(0+jg+jgk+jgx)/3;
+doge=response.xdg.btc.kraken.last*100000000;
+document.getElementById("huilv").innerHTML="汇率：U = <b>"+(100000000/jg).toFixed(0)+"</b> SAT&nbsp; / "+usdcny.toFixed(3)+"= <b>"+(100000000/jg/usdcny).toFixed(0)+"</b> SAT &nbsp;&nbsp; BTC "+jg.toFixed(0)+"  &nbsp;&nbsp; Doge "+((jg/100000000)*doge).toFixed(4)+"= <b>"+doge+"</b> SAT";
+
+});
+
+r=100;g=160;b=100;
+r1=r+Math.floor(Math.random()*(255-r));
+g1=g+Math.floor(Math.random()*(255-g));
+b1=b+Math.floor(Math.random()*(255-b));
+r2=r+Math.floor(Math.random()*(255-r));
+g2=g+Math.floor(Math.random()*(255-g));
+b2=b+Math.floor(Math.random()*(255-b));
+r3=r+Math.floor(Math.random()*(255-r));
+g3=g+Math.floor(Math.random()*(255-g));
+b3=b+Math.floor(Math.random()*(255-b));
+background="white linear-gradient(120deg,rgb("+r1+", "+g1+", "+b1+"),rgb("+r2+", "+g2+", "+b2+"),rgb("+r3+","+g2+", "+b3+"))";
+document.body.style.background=background;
+</script>
+</body>
+</html>
