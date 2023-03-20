@@ -10,7 +10,7 @@ body{
 margin:auto;
 width:93%;
 max-width:960px;
-min-width:543px;
+min-width:393px;
 padding:10px;
 	FONT-FAMILY: Microsoft YaHei, Helvetica, Tahoma;  PADDING-TOP: 0px;
 }
@@ -26,16 +26,24 @@ A:link {
 A:hover {
 	COLOR: #ff6600; text-deroration: none;
 }
+.hang{
+vertical-align:center;
+padding-top:10px;
+min-height:36px;
+}
 .hang:hover {
 	background-color:#ccffcc;
 }
 .v1{
 display:inline-block;
+text-align:center;
 width:5%;
+overflow:hidden;
 }
 .v2{
 display:inline-block;
 width:25%;
+overflow:hidden;
 }
 .v3{
 display:inline-block;
@@ -46,7 +54,9 @@ padding-right:10px;
 }
 .v4{
 display:inline-block;
-width:20%;
+width:16%;
+min-width:100px;
+text-align:center;
 }
 .v5{
 display:inline-block;
@@ -66,7 +76,8 @@ var _hmt = _hmt || [];
 <body>
 <h1><img src="favicon.png" width="40" style="width:40px;" />比特闪微付服务 BtcLv.com<span style="float:right;font-size:23px">🇨🇳</span></h1>
 <div>
-<h3>说明：定时闪电网络付，在时间过了指定闪电微付日期或者提前提交正确放行密令下向LN地址打赏。</h3>
+<h3>说明：定时闪电网络微聪付，过了指定闪电微付日期或提前提交正确放行密令下可向LN地址打赏。</h3>
+<h4>&nbsp;&nbsp;可用作购物等三方，1）买方提交卖方LN地址并Zap给平台，2）卖方看到已生效再发货，3）买方确认收到后再将放行密令给卖方或等待自动放行，出问题请<a href="https://iris.to/cndx@ahr999.com" target="_blank">私聊</a>联系。</h4>
 </div>
 <div>
 <form action="https://8nostr.com/btclv.com/add/" target="_blank" method="post">
@@ -95,7 +106,7 @@ document.getElementById("ed").value=dt.getFullYear()+"-"+m+"-"+d;
 <div class="v1">ID</div>
 <div class="v2">接收LN地址</div>
 <div class="v3">聪SAT量值&nbsp;&nbsp;</div>
-<div class="v4">闪微日期</div>
+<div class="v4">闪微日期&nbsp;&nbsp;&nbsp;&nbsp;</div>
 <div class="v5">状态及放行密令</div>
  </div>
 <div id="lists">
@@ -110,7 +121,7 @@ document.getElementById("ed").value=dt.getFullYear()+"-"+m+"-"+d;
 </div>
 <br /><br /><br /><br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br /><br /><br /><br />
-<hr /> @ BtcLv.com
+<hr />2023 @ BtcLv.com
 <script>
 $.getJSON( "https://btayx.com/txbtc.com/api/?callback=?", function( response ) {
 usdcny=1/response.cny.usd.other.last;
@@ -132,18 +143,18 @@ $.getJSON( "https://8nostr.com/btclv.com/api/?callback=?", function( zaps ) {
 var strs="";
 for(var i=0;i<zaps.length;i++){
 strs=strs+'<div class="hang"><form action="https://8nostr.com/btclv.com/pass/" target="_blank" method="post">';
-strs=strs+'<div class="v1">'+zaps[i].id+'<input type="hidden" name="id" value="'+zaps[i].id+'" ></div>';
+strs=strs+'<div class="v1"><b>'+zaps[i].id+'</b><input type="hidden" name="id" value="'+zaps[i].id+'" ></div>';
 strs=strs+'<div class="v2"><a href="lightning:'+zaps[i].ln+'" target="_self">'+zaps[i].ln+'</a></div>';
 strs=strs+'<div class="v3"><b>'+zaps[i].satoshi+'</b>(≈'+(sz*zaps[i].satoshi).toFixed(2)+')</div>';
-strs=strs+'<div class="v4">'+zaps[i].sentday+'</div>';
+strs=strs+'<div class="v4" title="创建时间:'+zaps[i].addate+'\n更新时间:'+zaps[i].newtime+'">'+zaps[i].sentday+'</div>';
 var states=zaps[i].state;
 var stastr='<input type="text" name="psd" value="" style="width:55px;" placeholder=""> <input type="submit" value="放行" />';
-if(states=="n")stastr='<a href="https://getalby.com/p/cndx" target="_blank">1.<b>待⚡</b></a><a href="lightning:cndx@btclv.com" target="_self">后生效...</a>'+stastr;
-if(states=="y")stastr='2.已生效等放行'+stastr;
-if(states=="p")stastr='3.已放行，等待⚡Zap微付...';
+if(states=="n")stastr='<a href="https://getalby.com/p/cndx" target="_blank">➊.<b>待⚡</b></a><a href="lightning:cndx@btclv.com" target="_self">后生效...</a>'+stastr;
+if(states=="y")stastr='❷.已生效等放行'+stastr;
+if(states=="p")stastr='❸.已放行，等待⚡Zap微付...';
 //n new  y yeswaite [->( p psd-conform )-> z zipedshow -> c close ] [ x not-bulid  -> d del]
 if(states=="z"||states=="c")stastr='√.已经⚡Zap微付，任务结束';
-if(states=="x")stastr='×.<del>因长期未转入⚡激活已失效</del>';
+if(states=="x")stastr='×.<del>长期未转入⚡未激活已失效</del>';
 strs=strs+'<div class="v5">'+stastr+'</div>';
 strs=strs+'</form></div>';
 }
